@@ -1,3 +1,7 @@
+/*
+這題也是按這題意直接寫出來，沒想到寫了這麼多行(汗
+查了一下別人的題解，好像也只有這種做法，那就這樣吧>_<
+*/
 #include<bits/stdc++.h>
 using namespace std;
 char board[10][10];
