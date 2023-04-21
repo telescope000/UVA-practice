@@ -1,3 +1,8 @@
+/*
+這題不難，直接根據題目的意思解題就好。
+前面一直找不到錯誤，侯來才發現可以用另外的陣列先儲存洗牌後的樣子，最後再複製回來。
+程式碼中的gets(型別為char的字串)只能在c++11中運用。
+*/
 #include<bits/stdc++.h>
 using namespace std;
 string int_to_card(int i){
