@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct product{
+	int price=0,day=0;
+};
+bool cmp(product a,product b){
+	return a.price>b.price;
+	if(a.price==b.price)return a.day>b.day;
+}
+bool cmp2(product a,product b){
+	return a.day<b.day;
+	if(a.day==b.day)return a.price>b.price;
+}
+int main(){
+	int n;
+	while(cin>>n){
+		int c=0;
+		product pro[10005],ans[10005];
+		for(int i=0;i<n;i++){
+			cin>>pro[i].price>>pro[i].day;
+		}
+		sort(pro,pro+n,cmp);
+		for(int i=0;i<n;i++){
+			if(ans[pro[i].day].day==0){
+				ans[pro[i].day]=pro[i];
+				if(c<pro[i].day)c=pro[i].day;
+			}
+			else{
+				for(int j=pro[i].day;j>=1;j--){
+					if(ans[j].day==0){
+						ans[j]=pro[i];
+						if(c<pro[i].day)c=pro[i].day;
+						break;		
+					}
+				}	
+			}
+		}
+		int sum=0;
+		for(int i=0;i<=c;i++){
+			sum+=ans[i].price;
+		}
+		cout<<sum<<"\n";
+	}
+}
