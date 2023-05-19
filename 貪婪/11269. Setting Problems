@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Sg{
+	int s,g;
+};
+bool cmp(struct Sg a,struct Sg b){
+	return a.s+max(a.g,b.s)+b.g<b.s+max(b.g,a.s)+a.g;
+}
+int main(){
+	int n;
+	struct Sg sg[105];	
+	while(cin>>n){
+		for(int i=0;i<n;i++){
+			cin>>sg[i].s;
+		}
+		for(int i=0;i<n;i++){
+			cin>>sg[i].g;
+		}
+		sort(sg,sg+n,cmp);
+		int S=0,G=0;
+		for(int i=0;i<n;i++){
+			S+=sg[i].s;
+			if(G<=S)G=S+sg[i].g;
+			else G+=sg[i].g;
+		}
+		cout<<G<<"\n";
+	}
+}
