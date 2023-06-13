@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int n;
+	while(cin>>n){
+		char A='A',a='a';
+		cout<<"2 "<<n<<" "<<n<<"\n";
+		for(int i=0;i<n;i++){
+			for(int j=0;j<n;j++){
+				cout<<A;
+			}
+			cout<<"\n";
+			A++;
+			if(A>'Z')A=a++;
+		}
+		cout<<"\n";
+		A='A';
+		a='a';
+		for(int i=0;i<n;i++){
+			for(int j=0;j<n;j++){
+				cout<<A;
+				A++;
+				if(A>'Z')A=a++;
+			}
+			cout<<"\n";
+			A='A';
+			a='a';
+		}
+	}
+} 
