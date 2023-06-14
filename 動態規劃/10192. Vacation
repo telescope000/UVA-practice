@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int Case=1,ans,num[105][105];
+	string a,b;
+	while(1){
+		getline(cin,a);
+		if(a=="#")break;
+		getline(cin,b);
+		memset(num,0,sizeof(num));
+		for(int i=0;i<a.length();i++){
+			for(int j=0;j<b.length();j++){
+				if(a[i]==b[j]){
+					num[i+1][j+1]=num[i][j]+1;
+				}
+				else{
+					if(num[i+1][j]>num[i][j+1]){
+						num[i+1][j+1]=num[i+1][j];
+					}
+					else{
+						num[i+1][j+1]=num[i][j+1];
+					}
+				}
+			}
+		}
+		ans=num[a.length()][b.length()];
+		cout<<"Case #"<<Case<<": you can visit at most "<<ans<<" cities.\n";
+		Case++;
+	}
+}
