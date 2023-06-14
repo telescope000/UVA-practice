@@ -1,0 +1,80 @@
+//311
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	long long int num[7],total,box,p[4]={0,5,3,1},x[4]={0,7,6,5},tmp;
+	while(1){
+		total=0;
+		box=0;
+		for(int i=1;i<7;i++){
+			cin>>num[i];
+			total+=num[i];
+		}
+		if(!total)break;
+		for(int i=6;i>=1;i--){
+			switch(i){
+				case 1:
+					if(num[1]>0){
+						box+=num[1]/36;
+						num[1]%=36;
+						if(num[1]>0)box++;
+					}
+					break;
+				case 2:
+					if(num[2]>0){
+						box+=num[2]/9;
+						num[2]%=9;
+						if(num[2]>0){
+							box++;
+							tmp=36-num[2]*4;
+							num[1]-=tmp;
+						}
+					}
+					break;
+				case 3:
+					box+=num[3]/4;
+					num[3]%=4;
+					if(num[3]>0){
+						box++;
+						if(num[2]>0){
+							tmp=p[num[3]];
+							if(num[2]>tmp){
+								num[2]-=tmp;
+								num[1]-=x[num[3]];
+							}
+							else{
+								tmp-=num[2];
+								num[2]=0;
+								tmp=tmp*4+x[num[3]];
+								num[1]-=tmp;
+							}	
+						}
+						else if(num[1]>0)num[1]-=x[num[3]];
+					}
+					break;
+				case 4:
+					box+=num[i];
+					if(num[2]>0){
+						int tmp=num[i]*5;
+						if(tmp>num[2]){
+							tmp-=num[2];
+							num[2]=0;
+							num[1]-=tmp*4;
+						}
+						else{
+							num[2]-=tmp;
+						}
+					}
+					break;
+				case 5:
+					box+=num[i];
+					num[1]-=num[i]*11;
+					break;
+				case 6:
+					box+=num[i];
+					break;
+			}
+		}
+		cout<<box<<"\n";
+	}
+}
