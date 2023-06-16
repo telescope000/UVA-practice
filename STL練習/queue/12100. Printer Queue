@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool cmp(int a,int b){
+	return a>b;
+}
+int main(){
+	queue<int>q;
+	int Case,ans,n,p,k,tmp,num[105],key,count;
+	cin>>Case;
+	while(Case--){
+		while(!q.empty())q.pop();
+		ans=0;
+		count=0;
+		memset(num,0,sizeof(num));
+		cin>>n>>p;
+		for(int i=0;i<n;i++){
+			cin>>tmp;
+			num[i]=tmp;
+			if(i==p){
+				key=tmp;
+				tmp=10;	
+			}
+			q.push(tmp);
+		}
+		for(int i=0;i<n;i++){
+			if(num[i]>key)count++;
+		}
+		sort(num,num+n,cmp);
+		k=0;
+		while(1){
+			tmp=q.front();
+			q.pop();
+			if(tmp==10){
+				tmp=key;
+				if(tmp>=num[k]){
+					ans++;
+					break;
+				}
+				else{
+					tmp=10;
+					q.push(tmp);
+				}
+			}
+			else if(tmp<num[k]){
+				q.push(tmp);
+			}
+			else if(tmp>=num[k]){
+				k++;
+				ans++;
+			}
+		} 
+		cout<<ans<<"\n";
+	}
+} 
