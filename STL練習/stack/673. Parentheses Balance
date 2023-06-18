@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int n;
+	string s;
+	stack<char>st;
+	bool judge;
+	cin>>n;
+	getchar();
+	while(n--){
+		judge=false;
+		while(!st.empty())st.pop();
+		getline(cin,s);
+		if(s==" "){
+			cout<<"Yes\n";
+			continue;
+		}
+		for(int i=0;i<s.length();i++){
+			if(s[i]=='(' || s[i]=='['){
+				st.push(s[i]);
+			}
+			else if((s[i]==')' || s[i]==']')&&(!st.empty())){
+				if((s[i]==')' && st.top()=='(')||(s[i]==']' && st.top()=='[')){
+					st.pop();
+				}
+				else{
+					judge=true;
+					break;
+				}
+			}
+			else{
+				judge=true;
+				break;
+			}
+		}
+		if(judge || !st.empty())cout<<"No\n";
+		else cout<<"Yes\n";
+	}
+}
