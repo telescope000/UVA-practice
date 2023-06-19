@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Struct{
+	char c;
+	int n;
+};
+bool cmp(struct Struct a,struct Struct b){
+	if(a.n==b.n)return a.c<b.c;
+	return a.n>b.n;
+}
+int main(){
+	int n,tmp;
+	struct Struct num[30];
+	string s;
+	cin>>n;
+	getchar();
+	while(n--){
+		memset(num,0,sizeof(num));
+		getline(cin,s);
+		for(int i=0;i<s.length();i++){
+			s[i]=tolower(s[i]);
+			if(s[i]<='z'&&s[i]>='a'){
+				num[s[i]-'a'].n++;
+				num[s[i]-'a'].c=s[i];
+			}
+		}
+		sort(num,num+29,cmp);
+		tmp=num[0].n;
+		for(int i=0;i<29;i++){
+			if(num[i].n==tmp){
+				cout<<num[i].c;
+			}
+		}
+		cout<<"\n";
+	}
+}
