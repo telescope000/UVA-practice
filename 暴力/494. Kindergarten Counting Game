@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	string s;
+	int ans;
+	bool judge=false;
+	while(getline(cin,s)){
+		ans=0;
+		for(int i=0;i<s.length();i++){
+			if((s[i]>='a'&& s[i]<='z')||(s[i]>='A'&&s[i]<='Z')){
+				judge=true;
+			}
+			else{
+				if(judge){
+					ans++;
+					judge=false;
+				}
+			}
+		}
+		cout<<ans<<"\n";
+	}
+}
