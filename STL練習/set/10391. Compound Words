@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	string s,s1,s2;
+	set<string>str;
+	vector<string>arr;
+	while(cin>>s && !cin.eof()){
+		str.insert(s);
+		arr.push_back(s); 
+	}
+	for(int i=0;i<arr.size();i++){
+		for(int j=0;j<arr[i].length();j++){
+			s1 = arr[i].substr(arr[i].length()-j);
+			s2 = arr[i].substr(0,arr[i].length()-j);
+			if(str.count(s1)&&str.count(s2)){
+				cout<<arr[i]<<"\n";
+				break;
+			}
+		}
+	}
+}
