@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	string s1,s2;
+	char num[1005];
+	int count;
+	bool judge;
+	while(getline(cin,s1)){  //用cin>>s1會Wrong Answer
+		getline(cin,s2);
+		memset(num,0,sizeof(num));
+		count=0;
+		for(int i=0;i<s1.length();i++){
+			for(int j=0;j<s2.length();j++){
+				if(s1[i]==s2[j]){
+					num[count]=s1[i];
+					count++;
+					s2[j]=1;
+					judge=true;	
+					break;		
+				}
+			}
+		}
+		sort(num,num+count);
+		for(int i=0;i<count;i++){
+			cout<<num[i];
+		}
+		cout<<"\n";
+	}
+}
