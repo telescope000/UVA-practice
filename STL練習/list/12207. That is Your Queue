@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(0);
+	std::cout.tie(0);
+	list<int>l;
+	list<int>::iterator it;
+	int n,r,tmp,t,Case=1;
+	char c;
+	while(cin>>n>>r){
+		l.clear();
+		if(n==0 && r==0)break;
+		if(n<r){
+			for(int i=1;i<=n;i++)l.push_back(i);	
+		}
+		else{
+			for(int i=1;i<=r;i++)l.push_back(i);
+		}
+		cout<<"Case "<<Case<<":\n";
+		Case++;
+		while(r--){
+			cin>>c;
+			if(c=='N'){
+				t=l.front();
+				cout<<t<<"\n";
+				l.pop_front();
+				l.push_back(t);
+			}	
+			else{
+				cin>>tmp;
+				for(it=l.begin();it!=l.end();it++){
+					if(*it==tmp){
+						l.erase(it);
+						break;	
+					}
+				}
+				l.push_front(tmp);
+			}
+		}
+	}
+}
