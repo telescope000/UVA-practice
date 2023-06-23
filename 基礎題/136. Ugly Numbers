@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int limit=9*1e8;
+long long int a[1600];
+int main(){
+	int count=1;
+	long long int i,j,k;
+	for(i=1;i<=limit;i*=2){
+		for(j=1;i*j<=limit;j*=3){
+			for(k=1;i*j*k<=limit;k*=5){
+				a[count++]=i*j*k;
+			}
+		}
+	}
+	sort(a,a+count);
+	cout<<"The 1500'th ugly number is "<<a[1500]<<".\n";
+}
