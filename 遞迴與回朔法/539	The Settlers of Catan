@@ -1,0 +1,37 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int n,m,best;
+int a[32][32];
+void visit(int i,int l){
+	int j;
+	for(j=0;j<n;j++){
+		if(a[i][j]){
+			a[i][j]=a[j][i]=0;
+			visit(j,l+1);
+			a[i][j]=a[j][i]=1;
+		}
+	}
+	if(l>best)best=l;
+}
+void solve_case(){
+	int i;
+	best=0;
+	for(int i=0;i<n;i++){
+		visit(i,0);
+	}
+	printf("%d\n",best);
+}
+int main(){
+	int i,j;
+	while(cin>>n>>m){
+		if(n==0 && m==0)break;
+		memset(a,0,sizeof(a));
+		for(int k=0;k<m;k++){
+			cin>>i>>j;
+			a[i][j]=a[j][i]=1;
+		}
+		solve_case();
+	}
+	return 0;
+}
