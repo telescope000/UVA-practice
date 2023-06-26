@@ -1,0 +1,59 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+const int maxs=20;
+const char wstr[][maxs]={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+const char mstr[][maxs]={"","January","February","March","April","May","June","July","August","September","October","November","December"};
+bool isLeap(int year,bool old=false){
+	if(old)return year%4==0?true:false;
+	else if((year%4==0 && year%100!=0)||year%400==0)return true;
+	else return false;
+}
+int days_of_month(int month,int year,bool leap){
+	if(month==2)return leap?29:28;
+	int d;
+	switch(month){
+		case 1:case 3:case 5:case 7:case 8:case 10:case 12:
+			return 31;
+		default:
+			return 30;
+	}
+}
+int days_of_year(int year,bool old){
+	return isLeap(year,old)?366:365;
+}
+bool valid(int month,int day,int year,bool old){
+	if(year<1)return false;
+	if(month<0||month>12)return false;
+	if(day<1||day>days_of_month(month,year,isLeap(year,old)))return false;
+	if(year==1752 && month==9 && 3<=day && day<=13)return false;
+	return true;
+}
+bool isOld(int month,int day,int year){
+	return year<1752 || (year==1752 && month<9) ||(year==1752 && month==9 && day<=2);
+} 
+int main(){
+	int month,day,year;
+	cin>>month>>day>>year;
+	while(month||day||year){
+		bool old=isOld(month,day,year);
+		if(!valid(month,day,year,old)){
+			cout<<month<<"/"<<day<<"/"<<year<<" is an invalid date.\n";
+		}
+		else{
+			int sum=0;
+			for(int yy=1;yy<year;yy++){
+				sum+=days_of_year(yy,old);
+			}
+			for(int mm=1;mm<month;mm++){
+				sum+=days_of_month(mm,year,isLeap(year,old));
+			}
+			sum+=day;
+			int week=sum%7;
+			if(old)week=(sum+5)%7;
+			cout<<mstr[month]<<" "<<day<<", "<<year<<" is a "<<wstr[week]<<"\n";
+		}
+		cin>>month>>day>>year;
+	}
+}
