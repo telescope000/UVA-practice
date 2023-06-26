@@ -1,0 +1,51 @@
+#include<cstdio>
+using namespace std;
+int P[1000][9];
+int tmp[8];
+int n=0;
+bool col[8]={0},left[15]={0},right[15]={0};
+void func(int r){
+	if(r==8){
+		for(int i=0;i<8;i++){
+			P[n][i]=tmp[i];
+		}
+		n++;
+		return;
+	}
+	for(int c=0;c<8;c++){
+		int ld=(c-r)+7;
+		int rd=c+r;
+		if(!col[c] && !left[ld] && !right[rd]){
+			col[c]=1;
+			left[ld]=1;
+			right[rd]=1;
+			tmp[r]=c;
+			func(r+1);
+			col[c]=0;
+			left[ld]=0;
+			right[rd]=0;
+		}
+	}
+}
+int main(){
+	func(0);
+	int Case;
+	int board[8][8];
+	scanf("%d",&Case);
+	while(Case--){
+		for(int i=0;i<8;i++){
+			for(int j=0;j<8;j++){
+				scanf("%d",&board[i][j]);
+			}
+		}
+		int ans=0;
+		for(int i=0;i<n;i++){
+			int sum=0;
+			for(int j=0;j<8;j++){
+				sum+=board[j][P[i][j]];
+			}
+			if(sum>ans)ans=sum;
+		}
+		printf("%5d\n",ans);
+	}
+}
