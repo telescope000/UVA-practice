@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<string.h>
+#define N 1010
+char str[N],ans[N];
+int num[3*N];
+int count(int i){
+	int j,mod=0,k=0;
+	char *q;
+	for(j=0;str[j]!='\0';j++){
+		mod=mod*10+str[j]-'0';
+		ans[k++]=mod/i+'0';
+		mod%=i;
+	}
+	ans[k]='\0';
+	q=ans;
+	while(*q=='0')q++;
+	if(mod!=0)return 0;
+	for(j=0;*q!='\0';j++,q++){
+		str[j]=*q;
+	}
+	str[j]='\0';
+	return 1;
+}
+int main(){
+	int i,j;
+	while(scanf("%s",str),str[0]!='-'){
+		j=0;
+		if(str[1]=='\0'){
+			printf("1%s\n",str);
+			continue;
+		}
+		for(i=9;i>1;i--){
+			while(count(i)){
+				num[j++]=i;
+			}
+		}
+		if(strlen(str)>1){
+			printf("There is no such number.\n");
+			continue;
+		}
+		while(j>0){
+			printf("%d",num[--j]);
+		}
+		printf("\n");
+	}
+}
